@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cronômetro e Contagem Regressiva</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="guias">
+            <button class="guia-btn ativo" data-guia="cronometro">Cronômetro</button>
+            <button class="guia-btn" data-guia="contagem">Contagem Regressiva</button>
+        </div>
+
+        <div class="conteudo-guia" id="guia-cronometro">
+            <div class="secao-cronometro">
+                <h2>Cronômetro</h2>
+                <div class="display" id="cronometro">00:00:00</div>
+                <div class="controles">
+                    <button id="iniciarCronometro">Iniciar</button>
+                    <button id="pausarCronometro">Pausar</button>
+                    <button id="resetarCronometro">Resetar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="conteudo-guia" id="guia-contagem" style="display: none;">
+            <div class="secao-contagem">
+                <h2>Contagem Regressiva</h2>
+                <div class="grupo-entrada">
+                    <input type="number" id="horas" placeholder="Horas" min="0">
+                    <input type="number" id="minutos" placeholder="Minutos" min="0">
+                    <input type="number" id="segundos" placeholder="Segundos" min="0" max="59">
+                </div>
+                <div class="display" id="contagem">00:00:00</div>
+                <div class="controles">
+                    <button id="iniciarContagem">Iniciar</button>
+                    <button id="pausarContagem">Pausar</button>
+                    <button id="resetarContagem">Resetar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html> 
