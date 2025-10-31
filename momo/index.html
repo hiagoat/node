@@ -1,0 +1,669 @@
+<!doctype html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Para a Priscila ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg: #fff0f3;
+            --accent: #e63946;
+            --soft: #ffe5ec;
+            --text: #5a0000;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            scroll-behavior: smooth;
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--accent);
+        }
+
+        .splash {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--soft), #fff);
+            z-index: 10;
+            transition: opacity .8s ease;
+        }
+
+        .splash-content {
+            text-align: center;
+            padding: 2.5rem;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 0 40px rgba(0, 0, 0, .1);
+            animation: fadeIn 2s ease;
+        }
+
+        .splash h1 {
+            font-size: 3rem;
+            margin: 0 0 10px;
+        }
+
+        .splash button {
+            background: var(--accent);
+            color: white;
+            border: none;
+            padding: 1rem 2.5rem;
+            border-radius: 40px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: transform .3s ease;
+        }
+
+        .splash button:hover {
+            transform: scale(1.05);
+        }
+
+        header {
+            padding: 1.5rem;
+            text-align: center;
+        }
+
+        header h2 {
+            font-size: 2.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        nav a {
+            margin: 0 12px;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: color .3s;
+        }
+
+        nav a:hover {
+            color: #c01c2d;
+        }
+
+        section {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, .05)
+        }
+
+        section h3 {
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .poem {
+            margin: 1.5rem 0;
+            padding: 1rem 1.5rem;
+            border-left: 5px solid var(--accent);
+            background: var(--soft);
+            border-radius: 12px;
+        }
+
+        .poem h4 {
+            font-size: 1.8rem;
+            margin: 0 0 0.5rem;
+        }
+
+        .carousel {
+            display: flex;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            gap: 12px;
+            padding: 1rem;
+        }
+
+        .carousel img {
+            scroll-snap-align: center;
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 16px;
+            transition: transform .3s;
+            cursor: pointer;
+        }
+
+        .carousel img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-popup {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: 0.3s;
+            z-index: 20;
+            flex-direction: column;
+        }
+
+        .image-popup.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .image-popup img {
+            max-width: 90%;
+            max-height: 70%;
+            border-radius: 20px;
+            transform: scale(0);
+            transition: transform 0.5s;
+        }
+
+        .image-popup.show img {
+            transform: scale(1);
+        }
+
+        .image-popup p {
+            color: white;
+            font-size: 1.5rem;
+            margin-top: 1rem;
+            text-align: center;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .music-list a {
+            display: block;
+            margin: 0.5rem 0;
+            font-size: 1.2rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color .3s;
+        }
+
+        .music-list a:hover {
+            color: #c01c2d;
+            text-decoration: underline;
+        }
+
+        .heart-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 2rem;
+        }
+
+        .heart-card {
+            width: 100px;
+            height: 100px;
+            perspective: 600px;
+            cursor: pointer;
+        }
+
+        .heart-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.8s;
+            transform-style: preserve-3d;
+        }
+
+        .heart-card.flipped .heart-inner {
+            transform: rotateY(180deg);
+        }
+
+        .heart-front,
+        .heart-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Great Vibes', cursive;
+            font-size: 1.5rem;
+        }
+
+        .heart-front {
+            background: var(--accent);
+            color: white;
+            animation: pulse 1.5s infinite;
+        }
+
+        .heart-back {
+            background: var(--soft);
+            color: var(--text);
+            transform: rotateY(180deg);
+            padding: 0.5rem;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text);
+            opacity: .8;
+            font-size: 1.2rem;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="splash" id="splash">
+        <div class="splash-content">
+            <h1>Bem-vinda, Priscila 💖</h1>
+            <p>Um cantinho feito com amor, só para você.</p>
+            <button id="entrar">Entrar</button>
+        </div>
+    </div>
+
+    <header>
+        <h2>Para a Priscila</h2>
+        <nav>
+            <a href="#poemas">Poemas</a>
+            <a href="#fotos">Fotos</a>
+            <a href="#musicas">Músicas</a>
+            <a href="#mensagens">Mensagens</a>
+            <a href="#lembrancas">Lembranças</a>
+        </nav>
+    </header>
+    <section id="poemas">
+        <h3>Poemas para você</h3>
+
+        <div class="poem">
+            <h4>💘 1. Teu Nome é Música</h4>
+            <p>Priscila, teu nome é canção,<br>
+                é verso feito de emoção.<br>
+                Quando o mundo perde a cor,<br>
+                teu sorriso acende o amor.<br><br>
+
+                Tua voz tem som de abrigo,<br>
+                e quando o tempo é inimigo,<br>
+                basta lembrar teu olhar,<br>
+                pra minha alma descansar.<br><br>
+
+                Você ama livros e sonhos,<br>
+                e eu amo os teus modos risonhos.<br>
+                Teu jeito doce e sincero<br>
+                é o que no amor mais espero.<br><br>
+
+                Se o céu me desse um pedido,<br>
+                ser teu pra sempre é o que eu teria dito.<br>
+                Porque em cada batida minha,<br>
+                é teu nome que caminha.<br><br>
+
+                Te amo no som, no silêncio, no vento,<br>
+                te amo em cada pensamento.<br>
+                E se o tempo um dia passar,<br>
+                em mim você vai continuar.</p>
+        </div>
+
+        <div class="poem">
+            <h4>🌹 2. Livro do Nosso Amor</h4>
+            <p>Entre páginas e histórias mil,<br>
+                existe um nome: Priscila sutil.<br>
+                No livro que o destino escreveu,<br>
+                cada linha tem algo teu.<br><br>
+
+                Te encontro em cada poesia,<br>
+                nas palavras e na melodia.<br>
+                Você é a pausa, o ponto, a vírgula,<br>
+                a emoção que em mim circula.<br><br>
+
+                Nos livros que tanto te encantam,<br>
+                os corações que se amam se levantam.<br>
+                E o meu, quando te vê sorrir,<br>
+                só quer te ler, te ouvir, te sentir.<br><br>
+
+                Se um dia a vida for tempestade,<br>
+                teu abraço será minha verdade.<br>
+                E se o tempo apagar a cor,<br>
+                meu coração reescreve o amor.</p>
+        </div>
+
+        <div class="poem">
+            <h4>💞 3. Nos Acordes do Teu Ser</h4>
+            <p>Priscila, és música e flor,<br>
+                és ritmo doce de puro amor.<br>
+                Teu riso é som que me embala,<br>
+                teu toque é calma que me fala.<br><br>
+
+                Teu jeito simples me fascina,<br>
+                tua voz é luz cristalina.<br>
+                Nos dias frios és meu cobertor,<br>
+                nas noites longas, és meu calor.<br><br>
+
+                Cada nota da tua canção<br>
+                acende a chama do coração.<br>
+                E quando a dor tenta entrar,<br>
+                teu olhar vem me curar.<br><br>
+
+                Se amar é tocar uma melodia,<br>
+                a tua é minha sinfonia.<br>
+                E mesmo que o tempo se vá,<br>
+                te amar é o que em mim ficará.</p>
+        </div>
+
+        <div class="poem">
+            <h4>💐 4. Prometo</h4>
+            <p>Prometo ser teu abrigo,<br>
+                quando o mundo não for amigo.<br>
+                Prometo te dar razão,<br>
+                mesmo quando eu tiver não.<br><br>
+
+                Prometo ouvir tua voz,<br>
+                mesmo no silêncio de nós.<br>
+                Prometo sorrir contigo,<br>
+                chorar se for preciso.<br><br>
+
+                Priscila, és meu amor sincero,<br>
+                te quero hoje, te quero e espero.<br>
+                Prometo cuidar, respeitar,<br>
+                e todos os dias te lembrar.<br><br>
+
+                Que amor não é só fantasia,<br>
+                é luta, é dor, é poesia.<br>
+                E eu, com todo meu fervor,<br>
+                prometo sempre te dar amor.</p>
+        </div>
+
+        <div class="poem">
+            <h4>🌷 5. Entre Céu e Papel</h4>
+            <p>Escrevo teu nome, Priscila, no céu,<br>
+                com tinta de sonho e doce véu.<br>
+                Em cada verso, em cada cor,<br>
+                tu és o centro do meu amor.<br><br>
+
+                Nos livros, busquei entender,<br>
+                como é tão bom te ter.<br>
+                Mas amor assim não se explica,<br>
+                só se sente, só se fica.<br><br>
+
+                Você é calma e tempestade,<br>
+                é razão e saudade.<br>
+                É o que o tempo não desfaz,<br>
+                é o amor que a alma traz.<br><br>
+
+                E se a vida for recomeço,<br>
+                é teu nome o que eu endereço.<br>
+                Porque em mim, sem engano,<br>
+                te amar é meu destino humano.</p>
+        </div>
+
+        <div class="poem">
+            <h4>🌙 6. Mil Motivos</h4>
+            <p>Tenho mil motivos pra te amar,<br>
+                e nenhum pra te deixar.<br>
+                Cada olhar teu me ensina,<br>
+                que amor é coisa divina.<br><br>
+
+                Teus gestos, tão delicados,<br>
+                são versos bem desenhados.<br>
+                Tua risada me desmonta,<br>
+                tua ausência me apronta.<br><br>
+
+                Priscila, teu amor me guia,<br>
+                mesmo na noite mais fria.<br>
+                E quando a dor me visita,<br>
+                teu carinho me ressuscita.<br><br>
+
+                Se um dia o tempo for cruel,<br>
+                guardarei teu nome no papel.<br>
+                E direi pro mundo, enfim:<br>
+                “o amor dela mora em mim.”</p>
+        </div>
+
+        <div class="poem">
+            <h4>❤️ 7. Eterno é o Teu Nome</h4>
+            <p>Priscila, o amor que sinto,<br>
+                não cabe em verso nem em instinto.<br>
+                Ele é vasto, doce e fiel,<br>
+                como o azul do próprio céu.<br><br>
+
+                Não é amor de fantasia,<br>
+                é feito de carne e poesia.<br>
+                É o toque, o cheiro, o olhar,<br>
+                que faz o mundo se calar.<br><br>
+
+                Você é rima no meu destino,<br>
+                meu caminho mais divino.<br>
+                É o porto que me abriga,<br>
+                a razão da minha vida.<br><br>
+
+                E se o tempo tudo levar,<br>
+                o amor ainda vai ficar.<br>
+                Pois o que sinto é sem fim —<br>
+                eterno como o que há em mim.</p>
+        </div>
+    </section>
+    </section>
+
+    <section id="fotos">
+        <h3>Nossos momentos</h3>
+        <div class="carousel">
+            <img src="img/momo1.jpg" alt="Foto 1" data-msg="Nosso primeiro abraço 💕">
+            <img src="img/momo2.jpg" alt="Foto 2" data-msg="Sorriso que ilumina meu dia 😍">
+            <img src="img/momo3.jpg" alt="Foto 3" data-msg="Momento inesquecível 🌹">
+            <img src="img/momo4.jpg" alt="Foto 4" data-msg="Nosso passeio dos sonhos 🌙">
+            <img src="img/momo5.jpg" alt="Foto 5" data-msg="Teu olhar é meu lar 💖">
+            <img src="img/momo6.jpg" alt="Foto 6" data-msg="Dia de risadas e amor 😘">
+            <img src="img/momo7.jpg" alt="Foto 7" data-msg="Memória linda de nós 🌷">
+            <img src="img/momo8.jpg" alt="Foto 8" data-msg="Sempre juntos, sempre felizes ❤️">
+        </div>
+    </section>
+
+    <div class="image-popup" id="imagePopup">
+        <img src="" alt="">
+        <p></p>
+    </div>
+
+    <h3
+        style="text-align:center; font-size:2.5rem; margin-top:2rem; color:#e63946; font-family:'Great Vibes', cursive;">
+    </h3>
+    <section id="musica-spotify"
+        style="max-width:400px;margin:2rem auto;text-align:center;font-family:'Poppins',sans-serif;">
+        <div
+            style="background:#1c1c1e;color:white;border-radius:20px;padding:1rem;box-shadow:0 10px 30px rgba(0,0,0,0.2);">
+            <!-- Capa -->
+            <img src="img/momo1.jpg" alt="Capa do Álbum" style="width:100%;border-radius:15px;">
+
+            <!-- Nome da música -->
+            <h4 style="margin:0.8rem 0 0.2rem 0;font-weight:600;font-size:1.2rem;">Best Part</h4>
+            <p style="margin:0 0 1rem 0;font-size:0.9rem;color:#ccc;">Daniel Caesar and H.E.R</p>
+
+            <!-- Barra de progresso -->
+            <input type="range" id="progress" min="0" max="100" value="0" style="width:100%;margin-bottom:1rem;">
+
+            <!-- Controles -->
+            <div style="display:flex;justify-content:center;align-items:center;gap:20px;">
+                <button id="prev"
+                    style="background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">⏮</button>
+                <button id="play"
+                    style="background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">▶</button>
+                <button id="next"
+                    style="background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;">⏭</button>
+            </div>
+
+            <!-- Elemento de áudio -->
+            <audio id="audio" src="musica/Daniel Caesar & H.E.R. - Best Part, a Visual [hKgl5-lkT8U].mp3"></audio>
+
+        </div>
+    </section>
+
+
+    <section id="mensagens">
+        <h3>Minhas mensagens para você</h3>
+        <p>Com você, tudo ganha cor, sentido e calmaria. 🌷</p>
+        <p>Seu abraço é o meu lugar favorito no mundo. 🤍</p>
+        <p>O amor que sinto por você não conhece distância, tempo ou fim.</p>
+        <p>Te amar é como respirar — simples, natural e essencial. 💞</p>
+        <p>Você é o sol que aquece meus dias e a lua que acalma minhas noites.</p>
+        <p>Quando penso em felicidade, o seu nome é o primeiro que me vem à mente. ✨</p>
+        <p>Nos seus olhos, encontro o lar que sempre procurei.</p>
+        <p>Seu sorriso é a minha inspiração diária. 🌻</p>
+        <p>Ao seu lado, até o silêncio tem som de paz.</p>
+        <p>Você transforma o comum em algo extraordinário só por estar presente.</p>
+        <p>Se amar você é um sonho, não quero nunca acordar. 🌙</p>
+        <p>Meu coração aprendeu a bater no ritmo do seu. 💓</p>
+        <p>Com você, descobri que o amor verdadeiro existe — e tem o seu nome.</p>
+        <p>Você é a página mais bonita que o destino escreveu na minha história.</p>
+        <p>Não preciso de muito, só de você — e o mundo inteiro já faz sentido. 💫</p>
+
+    </section>
+
+    <section id="lembrancas">
+        <h3>Lembranças</h3>
+        <ul>
+            <li>💬 <strong>Primeira conversa:</strong> 29/06 – O início de tudo, onde cada palavra já tinha um pouco de
+                nós.</li>
+            <li>📱 <strong>Primeiras mensagens no WhatsApp:</strong> 03/07 – Quando nossos dias começaram a se encher de
+                risadas e carinho digital.</li>
+            <li>💋 <strong>Primeiro beijo:</strong> 21/08 (pode estar errada) – Um momento que congelou o tempo e
+                aqueceu nossos corações.</li>
+            <li>💋 <strong>Segundo beijo:</strong> 23/08 – A confirmação de que algo mágico estava acontecendo.</li>
+            <li>🚗 <strong>Primeira vez me buscando no trabalho:</strong> 07/08 – Quando cada gesto simples se tornou
+                inesquecível.</li>
+            <li>🥰 <strong>Primeiro date:</strong> 23/08 – Nosso primeiro encontro oficial, cheio de sorrisos e
+                borboletas no estômago.</li>
+            <li>👫 <strong>Você conhecendo meu irmão:</strong> 28/09 – Um passo importante mostrando que você é parte da
+                minha vida.</li>
+            <li>📹 <strong>Primeiro Foto juntos:</strong> 05/09 – Momento que não teve inseguração e nosso amor foi
+                registrado por uma foto.</li>
+            <li>❤️ <strong>Primeiro "eu te amo":</strong> 27/08 – Aquele momento em que nossas almas se encontraram de
+                verdade.</li>
+            <li>🎁 <strong>Primeiro presente:</strong> 12/08 – Um gesto que selou o carinho e a atenção entre nós.</li>
+            <li>🏡 <strong>Conhecendo minha família:</strong> 19/10 – Mais um passo mostrando que queremos estar juntos
+                para sempre.</li>
+            <li>🏡 <strong>Conhecendo sua família:</strong> 17/10 – Um momento especial de conexão e amor compartilhado.
+            </li>
+            <li>🌹 <strong>Primeira flor:</strong> 23/08 – Um detalhe romântico que diz tudo sem precisar de palavras.
+            </li>
+        </ul>
+
+        <div class="heart-grid">
+            <div class="heart-card">
+                <div class="heart-inner">
+                    <div class="heart-front">❤</div>
+                    <div class="heart-back">Você é meu presente de Deus!</div>
+                </div>
+            </div>
+            <div class="heart-card">
+                <div class="heart-inner">
+                    <div class="heart-front">❤</div>
+                    <div class="heart-back">Te amo para sempre momo!</div>
+                </div>
+            </div>
+            <div class="heart-card">
+                <div class="heart-inner">
+                    <div class="heart-front">❤</div>
+                    <div class="heart-back">Vc é perfeita</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <footer>
+        <p>Com amor, para sempre seu namorado ❤️ — Pri e Pedro</p>
+    </footer>
+
+    <script>
+        document.getElementById('entrar').addEventListener('click', function () {
+            const splash = document.getElementById('splash');
+            splash.style.opacity = '0';
+            setTimeout(() => { splash.style.display = 'none'; }, 800);
+        });
+
+        const hearts = document.querySelectorAll('.heart-card');
+        hearts.forEach(h => h.addEventListener('click', () => h.classList.toggle('flipped')));
+
+        const popup = document.getElementById('imagePopup');
+        const popupImg = popup.querySelector('img');
+        const popupText = popup.querySelector('p');
+        document.querySelectorAll('.carousel img').forEach(img => {
+            img.addEventListener('click', () => {
+                popupImg.src = img.src;
+                popupText.textContent = img.dataset.msg;
+                popup.classList.add('show');
+            });
+        });
+        popup.addEventListener('click', e => {
+            if (e.target === popup) {
+                popup.classList.remove('show');
+            }
+        });
+        const audio = document.getElementById('audio');
+        const playBtn = document.getElementById('play');
+        const progress = document.getElementById('progress');
+
+        // Play/Pause
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playBtn.textContent = "⏸";
+            } else {
+                audio.pause();
+                playBtn.textContent = "▶";
+            }
+        });
+
+        // Atualiza a barra de progresso
+        audio.addEventListener('timeupdate', () => {
+            const percent = (audio.currentTime / audio.duration) * 100;
+            progress.value = percent || 0;
+        });
+
+        // Permite avançar/voltar na barra
+        progress.addEventListener('input', () => {
+            audio.currentTime = (progress.value / 100) * audio.duration;
+        });
+    </script>
+</body>
+
+</html>
